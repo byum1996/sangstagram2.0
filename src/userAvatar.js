@@ -9,7 +9,7 @@ const UserAvatar = ({user}) => {
             <Box>
                 <Avatar 
                     alt={user.displayName}
-                    src='https://picsum.photos/id/237/200/300'
+                    src={user.photoUrl}
                 />
             </Box>
             <Box m={1} display='flex' alignItems='center'>
