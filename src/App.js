@@ -1,6 +1,6 @@
-import React , {useState} from 'react';
+import React from 'react';
 import { CookiesProvider, useCookies } from 'react-cookie';
-import * as auth from './actions/auth';
+import * as authActions from './actions/auth';
 import { FirestoreProvider} from 'react-firestore';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
@@ -9,40 +9,38 @@ import Authenticated from './authenticated';
 import Unauthenticated from './unauthenticated'
 
 function App() {
-  const [ user, setUser ] = useState(null);
-  const [authError, setAuthError ] = useState(null);
-  const [ cookies, setCookie, removeCookie ] = useCookies(['authenticated', 'user']);
+  const [ cookies, setCookie, removeCookie ] = useCookies(['auth']);
 
   const logout = () => {
-    setUser(null);
-    removeCookie('authenticated')
-    auth.logout();
+    removeCookie('auth');
+    authActions.logout();
   };
 
   const login = () => {
-    auth.login()
-      .then(user => {
-        setUser(user);
-        setCookie('authenticated', true)
-        setCookie('user', user)
-        setAuthError(null)
+    authActions.login()
+      .then(googleUser => {
+        setCookie('auth', {
+          authenticated: true,
+          user: googleUser
+        });
+        // setAuthError(null);
       })
       .catch(error => {
-        setUser(null);
-        setAuthError(error);
+        removeCookie('auth');
+        // setAuthError(error);
       })
   }
 
-  console.log('cookies', cookies)
+  const { auth = {} } = cookies;
+  const { authenticated, user } = auth;
 
-  if (cookies.authenticated || user) {
-    console.log('user', user);
+  if (authenticated) {
     return(
       <CookiesProvider>
       <FirestoreProvider firebase={firebase}>
         <CssBaseline>
           <Container fixed>
-            <Authenticated cookies={cookies} logout={logout}/>
+            <Authenticated user={user} logout={logout}/>
           </Container>
         </CssBaseline>
       </FirestoreProvider>
@@ -54,15 +52,12 @@ function App() {
     <CookiesProvider>
       <CssBaseline>
         <Container fixed>
-          <Unauthenticated login={login} authError={authError}/>
+          <Unauthenticated login={login} />
         </Container>
       </CssBaseline>
     </CookiesProvider>
 
   )
-  
-  
-  
 }
 
 export default App;

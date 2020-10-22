@@ -6,9 +6,9 @@ import UserAndLogout from './userAndLogout';
 
 const queryCache = new QueryCache()
 
-const Authenticated = ({logout, cookies}) => {
-  const {user} = cookies
-    return (
+const Authenticated = ({logout, user}) => {
+
+  return (
         <ReactQueryCacheProvider queryCache={queryCache}>
           <NavDrawer/>
           <UserAndLogout user={user} logout={logout}/>
