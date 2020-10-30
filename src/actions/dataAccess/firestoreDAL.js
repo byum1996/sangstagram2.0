@@ -48,7 +48,8 @@ const firestoreDAL = (collection) => {
     
     const search = (field, operator, value) => {
         const query = collectionRef.where(field, operator, value);
-        
+        //returns promise, async, data which is an array
+
         return new Promise((resolve, reject) => {
             query.get()
                 .then(querySnapshot => {

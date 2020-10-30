@@ -4,9 +4,10 @@ const provider = new firebase.auth.GoogleAuthProvider();
 
 const login = () => {
     let googleUser = firebase.auth().currentUser;
-    if (googleUser) {
-        return Promise.resolve(googleUser);
-    }
+    // if (googleUser) {
+    //     return Promise.resolve(googleUser);
+    // }
+    console.log(googleUser)
 
     // TODO
     // First when you get user info from google, save in firebase under 'users table'
@@ -15,6 +16,7 @@ const login = () => {
         firebase.auth().signInWithPopup(provider)
             .then(result => {
                 googleUser = result.user;
+                console.log(googleUser);
                 resolve(googleUser);
             })
             .catch(error => reject(error.message))

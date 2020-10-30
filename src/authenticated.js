@@ -1,12 +1,12 @@
 import React from 'react';
-import { QueryCache, ReactQueryCacheProvider } from 'react-query'
+import { QueryCache, ReactQueryCacheProvider } from 'react-query';
 import Post from './posts/index';
 import NavDrawer from './navDrawer';
 import UserAndLogout from './userAndLogout';
 
 const queryCache = new QueryCache()
 
-const Authenticated = ({logout, user}) => {
+const Authenticated = ({logout, user, addUser}) => {
 
   return (
         <ReactQueryCacheProvider queryCache={queryCache}>

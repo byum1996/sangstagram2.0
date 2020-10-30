@@ -1,41 +1,23 @@
 import firestoreDAL from './firestoreDAL';
 
-const { search } = firestoreDAL('users');
-const authenticatePromise = (username, password) => {
+const { search, add } = firestoreDAL('users');
 
-    const field = 'username';
-    const operator = '==';
-    const value = username;
+const addUser = async (user) => {
+    const { email } = user 
+    const searchResult = await search('email', '==', email)
 
-    return new Promise((resolve, reject) => {
-        search(field, operator, value)
-            .then(user => {
-                resolve({
-                    isAuthenticated: user ? true : false
-                })
-            })
-            .catch(() => {
-                reject({
-                    isAuthenticated: false
-                })
-            })
-    })
-}
-
-const authenticate = async (username, password) => {
-
-    const field = 'username';
-    const operator = '==';
-    const value = username;
-
-    const [user] = await search(field, operator, value);
-    
-    console.log('user', user)
-    return {
-        isAuthenticated: user ? true : false
+    if (searchResult.length === 0) {
+        await add(user)
     }
+    
+    //todo
+    //1. destructure useful properties from user object 
+    //photoUrl, email, name, etc
+    //1.1 search if user already exists (email address)
+    //2. save by calling add function from firebaseDAL.js
 }
 
 export {
-    authenticate
+    addUser,
+    search
 };
