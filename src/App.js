@@ -1,6 +1,5 @@
 import React from 'react';
 import { CookiesProvider, useCookies } from 'react-cookie';
-import { addUser } from './actions/dataAccess/users';
 import * as authActions from './actions/auth';
 import { FirestoreProvider} from 'react-firestore';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -16,23 +15,6 @@ function App() {
     removeCookie('auth');
     authActions.logout();
   };
-
-  const loginOld = () => {
-    authActions.login()
-      .then(googleUser => {
-       // await addUser()
-        setCookie('auth', {
-          authenticated: true,
-          user: googleUser
-        });
-
-        // setAuthError(null);
-      })
-      .catch(error => {
-        removeCookie('auth');
-        // setAuthError(error);
-      })
-  }
 
   const login = async () => {
       const googleUser = await authActions.login();
@@ -58,7 +40,7 @@ function App() {
         </FirestoreProvider>
       </CookiesProvider>
     )
-  } 
+  }
 
   return(
     <CookiesProvider>
