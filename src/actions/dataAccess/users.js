@@ -2,6 +2,11 @@ import firestoreDAL from './firestoreDAL';
 
 const { search, add } = firestoreDAL('users');
 
+const searchUser = async (name) => {
+    const searchResult = await search('displayName', '==', name)
+    return searchResult
+}
+
 const addUser = async (user) => {
 
     //todo
@@ -24,5 +29,6 @@ const addUser = async (user) => {
 
 export {
     addUser,
-    search
+    search,
+    searchUser
 };

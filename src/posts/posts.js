@@ -30,18 +30,18 @@ const Posts = ({ posts = [], savePost }) => {
     const handleOnCancel = () => {
         setShowFormState(false)
     }
-    const handleOnSubmit = (file, caption) => {
+    const mit = (file, caption) => {
         setShowFormState(false);
         savePost(file, caption, currentUser)
     }
 
     return (
         <>
-            {
-                showFormState && <NewPost handleOnCancel={handleOnCancel} handleOnSubmit={handleOnSubmit}/>
-            }
             {posts.map((post, index) => renderPost(post, index))}
             <NewPostFab handleOnClick={handleOnClick}/>
+            {
+                showFormState && <NewPost handleOnCancel={handleOnCancel} mit={mit}/>
+            }
         </>
     )
 }

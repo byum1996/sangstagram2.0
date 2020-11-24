@@ -1,19 +1,30 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { QueryCache, ReactQueryCacheProvider } from 'react-query';
+import SearchUser from './searchUser';
 import Post from './posts/index';
-import NavDrawer from './navDrawer';
 import UserAndLogout from './userAndLogout';
+import CenteredTabs from './tab';
 
 const queryCache = new QueryCache()
 
-const Authenticated = ({logout, user, addUser}) => {
+const Authenticated = ({logout, user}) => {
 
   return (
-        <ReactQueryCacheProvider queryCache={queryCache}>
-          <NavDrawer/>
-          <UserAndLogout user={user} logout={logout}/>
-          <Post/>
-        </ReactQueryCacheProvider>
+        <Router>
+          <ReactQueryCacheProvider queryCache={queryCache}>
+            
+            <CenteredTabs/>
+            
+            <UserAndLogout user={user} logout={logout}/>
+            
+            <Switch>
+              <Route path='/home' exact component={Post} />
+              <Route path='/search' exact component={SearchUser} />
+            </Switch>
+            
+          </ReactQueryCacheProvider>
+        </Router>
     )
 }
 
