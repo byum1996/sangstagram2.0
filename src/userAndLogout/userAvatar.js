@@ -9,7 +9,7 @@ const UserAvatar = ({user}) => {
             <Box>
                 <Avatar 
                     alt={user.displayName}
-                    src={user.photoUrl}
+                    src={user.photoURL}
                 />
             </Box>
             <Box m={1} display='flex' alignItems='center'>

@@ -4,7 +4,7 @@ import NewPostFab from './newPostFab';
 import NewPost from './newPost';
 import Grid from '@material-ui/core/Grid';
 
-const currentUser = 'byum1998';
+const currentUser = 'byum1996';
 
 const renderPost = (post, index) => {
     return (

@@ -3,7 +3,7 @@ import LogoutButton from './logoutbutton';
 import UserAvatar from './userAvatar';
 import Box from '@material-ui/core/Box';
 
-const UserAndLogout = ({user, logout}) => {
+const UserAndLogoutContainer = ({user, logout}) => {
     return(
         <Box display='flex' justifyContent='space-between'>
             <UserAvatar user={user}/>
@@ -12,4 +12,4 @@ const UserAndLogout = ({user, logout}) => {
     )
 }
 
-export default UserAndLogout;
+export default UserAndLogoutContainer;

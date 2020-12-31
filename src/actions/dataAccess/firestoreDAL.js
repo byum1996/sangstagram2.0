@@ -2,6 +2,17 @@ import { firebase } from '../../firebase';
 import { chunk } from 'lodash';
 const db = firebase.firestore();
 
+const foo = {
+    abc: 'xyz',
+    bar: (message) => {
+        console.log('hello', message)
+    }
+}
+
+const message = 'world'
+foo.bar(message)
+
+
 const firestoreDAL = (collection) => {
     const collectionRef = db.collection(collection);
     
@@ -53,7 +64,10 @@ const firestoreDAL = (collection) => {
         return new Promise((resolve, reject) => {
             query.get()
                 .then(querySnapshot => {
-                    const data = querySnapshot.docs.map(doc => doc.data());
+                    const data = querySnapshot.docs.map(doc => ({
+                        id: doc.id,
+                        ...doc.data()
+                    }));
                     resolve(data);
                 })
                 .catch(error => {

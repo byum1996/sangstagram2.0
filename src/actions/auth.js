@@ -17,9 +17,9 @@ const login = () => {
             .then((response) => {
                 const { user } = response;
                 console.log('got the user', user);
-                const { displayName, email } = user
+                const { displayName, email, photoURL } = user
 
-                addUser({ displayName, email })
+                addUser({ displayName, email, photoURL })
                     .then(() => {
                         console.log('added user!')
                         resolve(user)

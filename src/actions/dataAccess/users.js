@@ -8,7 +8,6 @@ const searchUser = async (name) => {
 }
 
 const addUser = async (user) => {
-
     //todo
     //1. destructure useful properties from user object
     //photoUrl, email, name, etc

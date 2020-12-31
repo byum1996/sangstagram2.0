@@ -8,3 +8,7 @@ img {
     width: 750px;
     border-radius: 25px;
 }
+
+.Header {
+    border-bottom-style: solid;
+}

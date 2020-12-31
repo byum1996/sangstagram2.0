@@ -4,8 +4,8 @@ import { useQuery, useMutation, useQueryCache} from 'react-query';
 import { getPosts, addNewPost } from '../actions'
 
 const PostsContainer = () => {
-
     const cache = useQueryCache();
+    
     const { isLoading, isError, data, error } = useQuery('posts', getPosts)
     // when saving, we have to pass file, caption, user
 
