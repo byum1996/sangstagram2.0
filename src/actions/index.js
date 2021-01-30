@@ -4,15 +4,17 @@ import {uploadFile} from './storage';
 import postsDAL from './dataAccess/posts';
 
 const addNewPost = async ({file, caption, user}) => {
+    const { displayName, photoURL } = user;
     // TODO
     // 1. Save it in the firebase storage and get url
     const { url } = await uploadFile(file);
     // 2. Save the user, caption, url in the posts collection
     return await postsDAL.add({
-        caption,
         photoUrl: url,
-        createdBy: user,
-        createdAt: firebase.firestore.Timestamp.fromDate(new Date())
+        caption,
+        createdBy: displayName,
+        createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
+        userAvatar: photoURL
     });
 }
 

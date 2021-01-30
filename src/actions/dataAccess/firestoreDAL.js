@@ -2,17 +2,6 @@ import { firebase } from '../../firebase';
 import { chunk } from 'lodash';
 const db = firebase.firestore();
 
-const foo = {
-    abc: 'xyz',
-    bar: (message) => {
-        console.log('hello', message)
-    }
-}
-
-const message = 'world'
-foo.bar(message)
-
-
 const firestoreDAL = (collection) => {
     const collectionRef = db.collection(collection);
     

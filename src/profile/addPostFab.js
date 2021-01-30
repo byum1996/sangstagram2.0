@@ -19,14 +19,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NewPostFab({handleOnClick}) {
+export default function AddPostFab({handleOnClickOpen}) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
         <Fab 
-            onClick={handleOnClick}
-            color="primary" 
+            onClick={handleOnClickOpen}
+            color="secondary" 
             aria-label="add" 
             className='UploadButton' 
             size='large'>

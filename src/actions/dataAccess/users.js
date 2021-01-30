@@ -20,7 +20,6 @@ const addUser = async (user) => {
         try {
             await add(user)
         } catch (error) {
-            console.log('failed to add user', error);
             throw error;
         }
     }

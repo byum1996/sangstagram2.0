@@ -1,29 +1,11 @@
 import React from 'react';
 import Posts from './posts'
-import { useQuery, useMutation, useQueryCache} from 'react-query';
-import { getPosts, addNewPost } from '../actions'
+import { useQuery } from 'react-query';
+import { getPosts } from '../actions'
 
 const PostsContainer = () => {
-    const cache = useQueryCache();
     
     const { isLoading, isError, data, error } = useQuery('posts', getPosts)
-    // when saving, we have to pass file, caption, user
-
-       // Mutations
-    const [savePost] = useMutation(addNewPost, {
-        onSuccess: () => {
-            // Query Invalidations
-            cache.invalidateQueries('posts')
-        }
-    });
-
-    const handleSavePost = (file, caption, user) => {
-        savePost({
-            file,
-            caption,
-            user
-        });
-    }
 
     if (isLoading) {
         return <span>Loading...</span>
@@ -34,7 +16,7 @@ const PostsContainer = () => {
     }
 
     return (
-        <Posts posts={data} savePost={handleSavePost}/>
+        <Posts posts={data}/>
     )
 }
 

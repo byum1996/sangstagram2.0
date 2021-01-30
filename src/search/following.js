@@ -1,14 +1,9 @@
 import React from 'react';
 import { Typography, Avatar, Box, Button } from '@material-ui/core';
-import { unfollowUser } from '../actions/dataAccess/following';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 
-const renderFollowing = (followingResult) => {
-    const handleOnClick = (id) => {
-        unfollowUser(id)
-    }
-
+const renderFollowing = (followingResult, handleOnUnfollow) => {
     return(
         <List>
             { followingResult.map(({ id, following }) => {
@@ -23,7 +18,7 @@ const renderFollowing = (followingResult) => {
                             {displayName} 
                         </Box> 
                         <Box m={2}>
-                            <Button variant="outlined" onClick={() => handleOnClick(id)} color="primary">Unfollow</Button>
+                            <Button variant="outlined" onClick={() => handleOnUnfollow(id)} color="primary">Unfollow</Button>
                         </Box> 
                     </ListItem>
                 );
@@ -32,7 +27,7 @@ const renderFollowing = (followingResult) => {
     )
 }
 
-const Following = ({ followingResult }) => {
+const Following = ({ followingResult, handleOnUnfollow }) => {
     return(
         <>
             <Box display='flex' flexDirection='row'>
@@ -40,7 +35,7 @@ const Following = ({ followingResult }) => {
             </Box>
             
             <Box>
-                { renderFollowing(followingResult)}
+                { renderFollowing(followingResult, handleOnUnfollow)}
             </Box>
         </>
     )

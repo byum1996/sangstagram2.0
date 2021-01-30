@@ -1,5 +1,5 @@
 body {
-    background-image: url('https://i.pinimg.com/originals/af/0a/67/af0a67acb1da6998995b122e169725d1.png');
+    background-image: url('https://i.picsum.photos/id/102/4320/3240.jpg?hmac=ico2KysoswVG8E8r550V_afIWN963F6ygTVrqHeHeRc');
     background-size: 100%;
     background-attachment: fixed;
 }
@@ -7,6 +7,11 @@ body {
 img {
     width: 750px;
     border-radius: 25px;
+}
+
+.ProfileThumbnailPic {
+    width: 375px;
+    border-radius: 5px;
 }
 
 .Header {

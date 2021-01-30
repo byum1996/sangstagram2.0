@@ -28,7 +28,6 @@ function App() {
   const { authenticated, user } = auth;
 
   if (authenticated) {
-    console.log('user', cookies)
     return(
       <CookiesProvider>
         <FirestoreProvider firebase={firebase}>

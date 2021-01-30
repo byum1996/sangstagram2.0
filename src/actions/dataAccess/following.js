@@ -25,9 +25,17 @@ const { search, add, remove } = firestoreDAL('following');
 
 
 const followUser = async ({ user, following }) => {
-    console.log('followUser', { user, following })
+    const {
+        displayName,
+        email,
+        photoURL,
+    } = user
     await add({
-        user,
+        user: {
+            displayName,
+            email,
+            photoURL
+        },
         following
     });
 }
@@ -38,16 +46,16 @@ const unfollowUser = async (id) => {
     });
 }
 
-const getFollowing = async (user) => {
-    return await search('user.displayName', '==', user)
+const getFollowing = async (displayName) => {
+    return await search('user.displayName', '==', displayName)
 }
 
-const getFollowers = async (user) => {
-    return await search('following', '==', user)
+const getFollowers = async (displayName) => {
+    return await search('following.displayName', '==', displayName)
 }
 
 export {
-    followUser,
+    followUser, 
     unfollowUser,
     getFollowers,
     getFollowing

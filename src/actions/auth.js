@@ -16,12 +16,10 @@ const login = () => {
         firebase.auth().signInWithPopup(provider)
             .then((response) => {
                 const { user } = response;
-                console.log('got the user', user);
                 const { displayName, email, photoURL } = user
 
                 addUser({ displayName, email, photoURL })
                     .then(() => {
-                        console.log('added user!')
                         resolve(user)
                     })
                     .catch((error) => reject(error))

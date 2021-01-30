@@ -1,10 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Post from './post';
-import NewPostFab from './newPostFab';
-import NewPost from './newPost';
 import Grid from '@material-ui/core/Grid';
-
-const currentUser = 'byum1996';
 
 const renderPost = (post, index) => {
     return (
@@ -21,27 +17,13 @@ const renderPost = (post, index) => {
     )
 }
 
-const Posts = ({ posts = [], savePost }) => {
-    const [showFormState, setShowFormState] = useState(false);
+const Posts = ({ posts = [] }) => {
 
-    const handleOnClick = () => {
-        setShowFormState(true)
-    }
-    const handleOnCancel = () => {
-        setShowFormState(false)
-    }
-    const mit = (file, caption) => {
-        setShowFormState(false);
-        savePost(file, caption, currentUser)
-    }
+    console.log('posts posts.js' , posts)
 
     return (
         <>
             {posts.map((post, index) => renderPost(post, index))}
-            <NewPostFab handleOnClick={handleOnClick}/>
-            {
-                showFormState && <NewPost handleOnCancel={handleOnCancel} mit={mit}/>
-            }
         </>
     )
 }

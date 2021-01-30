@@ -1,39 +1,60 @@
-import React, { useState } from 'react';
-import { searchUser } from '../actions/dataAccess/users';
-import { useQuery, useMutation, useQueryCache} from 'react-query';
-import { getFollowing, unfollowUser, followUser } from '../actions/dataAccess/following';
-import Following from './following';
-import SearchUser from './searchUser';
+import React from 'react';
+import { useQuery, useMutation, useQueryCache } from 'react-query';
+import { getFollowing, getFollowers } from '../actions/dataAccess/following';
+import { getPosts, addNewPost } from '../actions'
+import ProfileUser from './profileUser';
+import FollowingCount from './followingCount';
+import FollowersCount from './followersCount';
+import Posts from './posts';
+import Box from '@material-ui/core/Box';
 
-const ProfileContainer = ({user}) => {
+const ProfileContainer = ({ user }) => {
     const cache = useQueryCache();
-    const [searchResult, setSearchResult] = useState([])
-    
+
     const { isLoading, isError, data, error } = useQuery('following', () => getFollowing(user.displayName))
 
-    const [followUserMutation] = useMutation(followUser, {
+    const { 
+        isLoading: isFollowersLoading, 
+        isError: isFollowersError, 
+        data: followers, 
+        error: followersError 
+    } = useQuery('followers', () => getFollowers(user.displayName))
+
+    const { 
+        isLoading: isPostsLoading, 
+        isError: isPostsError, 
+        data: posts, 
+        error: postsError 
+    } = useQuery('posts', getPosts)
+
+    const [savePost] = useMutation(addNewPost, {
         onSuccess: () => {
-            console.log('success!!!')
             // Query Invalidations
-            cache.invalidateQueries('following')
-        },
-        onError: (error, variables, context) => {
-            // An error happened!
-            console.log('onError', { error, variables })
-            console.log(`rolling back optimistic update with id ${context.id}`)
-        },
+            cache.invalidateQueries('posts')
+            console.log('SavePost successful')
+            // console.log([savePost], 'savePost')
+        }
     });
 
-    const handleOnClickSearch = async (searchTerm) => {
-        const result = await searchUser(searchTerm);
-        setSearchResult(result);
+    const handleSavePost = (file, caption, user) => {
+        // console.log('file caption user', {
+        //     file,
+        //     caption,
+        //     user
+        // })
+        savePost({
+            file,
+            caption,
+            user
+        });
     }
 
-    const handleOnFollow = (user,following) => {
-        followUserMutation({
-            user,
-            following
-        });
+    if (isPostsLoading) {
+        return <span>Loading...</span>
+    }
+
+    if (isPostsError) {
+        return <span>Error: {postsError.message}</span>
     }
 
     if (isLoading) {
@@ -44,15 +65,26 @@ const ProfileContainer = ({user}) => {
         return <span>Error: {error.message}</span>
     }
 
-    return(
+    if (isFollowersLoading) {
+        return <span>Loading...</span>
+    }
+
+    if (isFollowersError) {
+        return <span>Error: {followersError.message}</span>
+    }
+
+    const followersNumber = followers.length
+
+    const followingNumber = data.length
+
+    return (
         <>
-            <SearchUser 
-                user={user}
-                searchResult={searchResult}
-                handleOnFollow={handleOnFollow} 
-                handleOnClickSearch={handleOnClickSearch} 
-            />
-            <Following followingResult={data} user={user} unfollowUser={unfollowUser}/>
+            <Box display='flex' flexDirection='row'>
+                <ProfileUser user={user} />
+                <FollowingCount followingNumber={followingNumber} />
+                <FollowersCount followersNumber={followersNumber} />
+            </Box>
+            <Posts posts={posts} savePost={handleSavePost} user={user}/>
         </>
     )
 }
