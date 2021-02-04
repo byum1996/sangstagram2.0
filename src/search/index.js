@@ -1,15 +1,23 @@
 import React, { useState } from 'react';
 import { searchUser } from '../actions/dataAccess/users';
 import { useQuery, useMutation, useQueryCache} from 'react-query';
-import { getFollowing, unfollowUser, followUser } from '../actions/dataAccess/following';
+import { getFollowing, getFollowers, unfollowUser, followUser } from '../actions/dataAccess/following';
 import Following from './following';
 import SearchUser from './searchUser';
+import Followers from './followers';
 
 const SearchContainer = ({user}) => {
     const cache = useQueryCache();
     const [searchResult, setSearchResult] = useState([])
     
     const { isLoading, isError, data, error } = useQuery('following', () => getFollowing(user.displayName))
+
+    const { 
+        isLoading: isFollowersLoading, 
+        isError: isFollowersError, 
+        data: followers, 
+        error: followersError 
+    } = useQuery('followers', () => getFollowers(user.displayName))
 
     const [followUserMutation] = useMutation(followUser, {
         onSuccess: () => {
@@ -58,6 +66,14 @@ const SearchContainer = ({user}) => {
         return <span>Error: {error.message}</span>
     }
 
+    if (isFollowersLoading) {
+        return <span>Loading...</span>
+    }
+
+    if (isFollowersError) {
+        return <span>Error: {followersError.message}</span>
+    }
+
     return(
         <>
             <SearchUser 
@@ -71,6 +87,7 @@ const SearchContainer = ({user}) => {
                 user={user} 
                 handleOnUnfollow={handleOnUnfollow}
             />
+            <Followers user={user} followers={followers}/>
         </>
     )
 }
