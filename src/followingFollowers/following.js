@@ -31,7 +31,7 @@ const Following = ({ followingResult, handleOnUnfollow }) => {
     return(
         <>
             <Box display='flex' flexDirection='row'>
-                <Typography variant="h3" gutterBottom>Following</Typography>
+                <Typography variant="h3" gutterBottom>FOLLOWING</Typography>
             </Box>
             
             <Box>

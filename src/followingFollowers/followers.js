@@ -32,7 +32,7 @@ const Followers = ({ followers }) => {
     return(
         <>
             <Box display='flex' flexDirection='row'>
-                <Typography variant="h3" gutterBottom>Followers</Typography>
+                <Typography variant="h3" gutterBottom>FOLLOWERS</Typography>
             </Box>
             
             <Box>

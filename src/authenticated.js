@@ -4,6 +4,7 @@ import { QueryCache, ReactQueryCacheProvider } from 'react-query';
 // import Post from './posts/index';
 import UserAndLogout from './userAndLogout/index';
 import Search from './search/index';
+import FollowingFollowers from './followingFollowers/index';
 import Profile from './profile/index';
 import CenteredTabs from './tabs';
 
@@ -25,6 +26,9 @@ const Authenticated = ({logout, user}) => {
               </Route> */}
               <Route path='/search' exact>
                 <Search user={user}/>
+              </Route>
+              <Route path='/following/followers'>
+                <FollowingFollowers user={user}/>
               </Route>
               <Route path='/profile' exact>
                 <Profile user={user}/>

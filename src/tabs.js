@@ -23,6 +23,7 @@ export default function CenteredTabs() {
         >
             {/* <Tab label="Home" component={Link} to="/home" /> */}
             <Tab icon={<SearchIcon />} component={Link} to="/search" />
+            <Tab label="Following/Followers" component={Link} to="/following/followers" />
             <Tab label="Profile" component={Link} to="/profile" />
         </Tabs>
 
