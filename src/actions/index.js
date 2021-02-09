@@ -34,8 +34,11 @@ const getPosts = async () => {
     })
 }
 
+const removePost = (id) => postsDAL.remove(id);
+
 export {
     todos,
     addNewPost,
-    getPosts
+    getPosts,
+    removePost
 }

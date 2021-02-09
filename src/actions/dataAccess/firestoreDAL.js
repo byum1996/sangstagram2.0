@@ -111,7 +111,7 @@ const firestoreDAL = (collection) => {
         })
     }
 
-    const remove = (document) =>  collectionRef.doc(document.id).delete();
+    const remove = (id) =>  collectionRef.doc(id).delete();
 
     return {
         getAll,

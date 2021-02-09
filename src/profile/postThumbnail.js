@@ -6,6 +6,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import DeleteIcon from '@material-ui/icons/Delete';
 import Slide from '@material-ui/core/Slide';
 
 const useStyles = makeStyles((theme) => ({
@@ -19,7 +20,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const PostThumbnail = ({post}) => {
+const PostThumbnail = ({post, handleDeletePost}) => {
     const classes = useStyles();
     const { photoUrl } = post
     const [openState, setOpenState] = useState(false);
@@ -45,6 +46,9 @@ const PostThumbnail = ({post}) => {
                     <Toolbar>
                         <IconButton edge="start" color="inherit" onClick={handleOnClickClose} aria-label="close">
                             <CloseIcon />
+                        </IconButton>
+                        <IconButton edge="end" color='inherit' onClick={()=> handleDeletePost(post.id)} aria-label="remove">
+                            <DeleteIcon />
                         </IconButton>
                     </Toolbar>
                 </AppBar>

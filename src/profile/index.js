@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery, useMutation, useQueryCache } from 'react-query';
 import { getFollowing, getFollowers } from '../actions/dataAccess/following';
-import { getPosts, addNewPost } from '../actions'
+import { getPosts, addNewPost, removePost } from '../actions'
 import ProfileUser from './profileUser';
 import FollowingCount from './followingCount';
 import FollowersCount from './followersCount';
@@ -31,23 +31,26 @@ const ProfileContainer = ({ user }) => {
         onSuccess: () => {
             // Query Invalidations
             cache.invalidateQueries('posts')
-            console.log('SavePost successful')
             // console.log([savePost], 'savePost')
         }
     });
 
+    const [deletePost] = useMutation(removePost, {
+        onSuccess: () => {
+            // Query Invalidations
+            cache.invalidateQueries('posts')
+        }
+    });
+
     const handleSavePost = (file, caption, user) => {
-        // console.log('file caption user', {
-        //     file,
-        //     caption,
-        //     user
-        // })
         savePost({
             file,
             caption,
             user
         });
     }
+
+    const handleDeletePost = (id) => deletePost(id)
 
     if (isPostsLoading) {
         return <span>Loading...</span>
@@ -84,7 +87,7 @@ const ProfileContainer = ({ user }) => {
                 <FollowingCount followingNumber={followingNumber} />
                 <FollowersCount followersNumber={followersNumber} />
             </Box>
-            <Posts posts={posts} savePost={handleSavePost} user={user}/>
+            <Posts posts={posts} savePost={handleSavePost} user={user} handleDeletePost={handleDeletePost}/>
         </>
     )
 }
