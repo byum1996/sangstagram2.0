@@ -4,7 +4,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 
 const renderFollowers = (followers) => {
-    console.log('followers',followers)
     return(
         <List>
             { followers.map(({ id, user }) => {

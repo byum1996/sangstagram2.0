@@ -41,9 +41,8 @@ const followUser = async ({ user, following }) => {
 }
 
 const unfollowUser = async (id) => {
-    await remove({
-       id
-    });
+    console.log('unfollow user', id)
+    await remove(id);
 }
 
 const getFollowing = async (displayName) => {
@@ -53,7 +52,7 @@ const getFollowing = async (displayName) => {
 const getFollowers = async (displayName) => {
     return await search('following.displayName', '==', displayName)
 }
-
+ 
 export {
     followUser, 
     unfollowUser,

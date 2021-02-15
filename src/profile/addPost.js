@@ -26,7 +26,6 @@ const AddPost = ({handleOnSubmit, user}) => {
     }
 
     const handleOnDropzoneChange = (files) => {
-        console.log('files', files)
         if (files.length === 0) {
             setFileState(undefined)
         } else if (files.length > 0) {

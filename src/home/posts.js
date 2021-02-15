@@ -19,8 +19,6 @@ const renderPost = (post, index) => {
 
 const Posts = ({ posts = [] }) => {
 
-    console.log('posts posts.js' , posts)
-
     return (
         <>
             {posts.map((post, index) => renderPost(post, index))}

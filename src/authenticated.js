@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { QueryCache, ReactQueryCacheProvider } from 'react-query';
-// import Post from './posts/index';
+// import Home from './home/index';
 import UserAndLogout from './userAndLogout/index';
 import Search from './search/index';
 import FollowingFollowers from './followingFollowers/index';
@@ -22,7 +22,7 @@ const Authenticated = ({logout, user}) => {
             
             <Switch>
               {/* <Route path='/home' exact>
-                <Post/>
+                <Home/>
               </Route> */}
               <Route path='/search' exact>
                 <Search user={user}/>

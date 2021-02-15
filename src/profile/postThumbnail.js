@@ -20,7 +20,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const PostThumbnail = ({post, handleDeletePost}) => {
+const PostThumbnail = ({post, handleOnDeletePost}) => {
     const classes = useStyles();
     const { photoUrl } = post
     const [openState, setOpenState] = useState(false);
@@ -47,7 +47,7 @@ const PostThumbnail = ({post, handleDeletePost}) => {
                         <IconButton edge="start" color="inherit" onClick={handleOnClickClose} aria-label="close">
                             <CloseIcon />
                         </IconButton>
-                        <IconButton edge="end" color='inherit' onClick={()=> handleDeletePost(post.id)} aria-label="remove">
+                        <IconButton edge="end" color='inherit' onClick={()=> handleOnDeletePost(post.id)} aria-label="remove">
                             <DeleteIcon />
                         </IconButton>
                     </Toolbar>

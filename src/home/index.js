@@ -3,7 +3,7 @@ import Posts from './posts'
 import { useQuery } from 'react-query';
 import { getPosts } from '../actions'
 
-const PostsContainer = () => {
+const HomeContainer = () => {
     
     const { isLoading, isError, data, error } = useQuery('posts', getPosts)
 
@@ -20,4 +20,4 @@ const PostsContainer = () => {
     )
 }
 
-export default PostsContainer;
+export default HomeContainer;

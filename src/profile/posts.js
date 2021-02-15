@@ -1,26 +1,17 @@
 import React from 'react';
 import PostThumbnail from './postThumbnail';
 import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 import AddPost from './addPost';
 
-const renderPost = (post, index, handleDeletePost) => {
+const renderPost = (post, index, handleOnDeletePost) => {
 
     return (
-        <Grid
-            container
-            direction="row"
-            justify="space-around"
-            alignItems="flex-start"
-            key={index}
-        > 
-            <Grid item xs> 
-                <PostThumbnail post={post} handleDeletePost={handleDeletePost} />
-            </Grid>     
-        </Grid>
+        <PostThumbnail post={post} handleOnDeletePost={handleOnDeletePost} />
     )
 }
 
-const Posts = ({posts = [], savePost, user, handleDeletePost}) => {
+const Posts = ({posts = [], savePost, user, handleOnDeletePost}) => {
 
     const handleOnSubmit = (file, caption) => {
         savePost(file, caption, user)
@@ -28,7 +19,7 @@ const Posts = ({posts = [], savePost, user, handleDeletePost}) => {
 
     return(
         <>
-            {posts.map((post, index) => renderPost(post, index, handleDeletePost))}
+            {posts.map((post, index) => renderPost(post, index, handleOnDeletePost))}
             <AddPost handleOnSubmit={handleOnSubmit} user={user} />
         </>
     )

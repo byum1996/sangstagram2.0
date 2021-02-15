@@ -50,7 +50,7 @@ const ProfileContainer = ({ user }) => {
         });
     }
 
-    const handleDeletePost = (id) => deletePost(id)
+    const handleOnDeletePost = (id) => deletePost(id)
 
     if (isPostsLoading) {
         return <span>Loading...</span>
@@ -87,7 +87,7 @@ const ProfileContainer = ({ user }) => {
                 <FollowingCount followingNumber={followingNumber} />
                 <FollowersCount followersNumber={followersNumber} />
             </Box>
-            <Posts posts={posts} savePost={handleSavePost} user={user} handleDeletePost={handleDeletePost}/>
+            <Posts posts={posts} savePost={handleSavePost} user={user} handleOnDeletePost={handleOnDeletePost}/>
         </>
     )
 }
