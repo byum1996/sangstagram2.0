@@ -1,7 +1,7 @@
 import React from 'react';
 import PostThumbnail from './postThumbnail';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
+// import Grid from '@material-ui/core/Grid';
+// import Box from '@material-ui/core/Box';
 import AddPost from './addPost';
 
 const renderPost = (post, index, handleOnDeletePost) => {

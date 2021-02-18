@@ -23,7 +23,6 @@ const { search, add, remove } = firestoreDAL('following');
 //    following: 'Brandon'
 // }
 
-
 const followUser = async ({ user, following }) => {
     const {
         displayName,

@@ -25,7 +25,7 @@ const ProfileContainer = ({ user }) => {
         isError: isPostsError, 
         data: posts, 
         error: postsError 
-    } = useQuery('posts', getPosts)
+    } = useQuery('posts', () => getPosts(user))
 
     const [savePost] = useMutation(addNewPost, {
         onSuccess: () => {

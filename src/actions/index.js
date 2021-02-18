@@ -18,9 +18,12 @@ const addNewPost = async ({file, caption, user}) => {
     });
 }
 
-const getPosts = async () => {
+const getPosts = async (user) => {
+    const field = "createdBy";
+    const operator = "==";
+    const value = user.displayName
 
-    const posts = await postsDAL.getAll();
+    const posts = await postsDAL.search(field, operator, value);
 
     // array.map() receives a function
     // this function receives one parameter, must return something else

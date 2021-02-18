@@ -1,12 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { QueryCache, ReactQueryCacheProvider } from 'react-query';
-// import Home from './home/index';
-import UserAndLogout from './userAndLogout/index';
+import Home from './home/index';
+import NavBar from './navBar/index';
 import Search from './search/index';
 import FollowingFollowers from './followingFollowers/index';
 import Profile from './profile/index';
-import CenteredTabs from './tabs';
 
 const queryCache = new QueryCache()
 
@@ -16,14 +15,12 @@ const Authenticated = ({logout, user}) => {
         <Router>
           <ReactQueryCacheProvider queryCache={queryCache}>
 
-            <UserAndLogout user={user} logout={logout}/>
-            
-            <CenteredTabs/>
+            <NavBar user={user} logout={logout}/>
             
             <Switch>
-              {/* <Route path='/home' exact>
+              <Route path='/home' exact>
                 <Home/>
-              </Route> */}
+              </Route>
               <Route path='/search' exact>
                 <Search user={user}/>
               </Route>
