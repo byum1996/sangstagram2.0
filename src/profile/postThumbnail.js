@@ -20,7 +20,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const PostThumbnail = ({post, handleOnDeletePost}) => {
+const PostThumbnail = ({post, handleOnDeletePost, saveComment}) => {
     const classes = useStyles();
     const { photoUrl } = post
     const [openState, setOpenState] = useState(false);
@@ -52,7 +52,7 @@ const PostThumbnail = ({post, handleOnDeletePost}) => {
                         </IconButton>
                     </Toolbar>
                 </AppBar>
-                <Post post={post}/>
+                <Post post={post} saveComment={saveComment}/>
             </Dialog>
 
         </>

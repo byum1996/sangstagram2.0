@@ -12,13 +12,12 @@ const SearchUser = ({user, searchResult, handleOnFollow, handleOnClickSearch}) =
 
     return(
         <>
-        <SearchBar
-            searchState={searchState} 
-            handleOnSearchChange={handleOnSearchChange} 
-            handleOnClickSearch={() => handleOnClickSearch(searchState)}
-        />
-
-        <Box display='flex'> { renderSearchResult(user, searchResult, handleOnFollow) } </Box>
+            <SearchBar
+                searchState={searchState} 
+                handleOnSearchChange={handleOnSearchChange} 
+                handleOnClickSearch={() => handleOnClickSearch(searchState)}
+            />
+            <Box display='flex'> { renderSearchResult(user, searchResult, handleOnFollow) } </Box>
         </>
     )
 }

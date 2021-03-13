@@ -31,9 +31,14 @@ const getAll = () => {
 };
 
 const saveComment = async ({user, post, comment}) => {
-
-    const { name, userAvatar } = user;
-    const { comments, ...rest } = post;
+    const { 
+        displayName, 
+        photoURL: userAvatar
+     } = user;
+    const { 
+        comments = [], 
+        ...rest 
+    } = post;
     const { text } = comment;
 
     const convertedComments = comments.map(({ createdAt, ...rest }) => ({
@@ -43,7 +48,7 @@ const saveComment = async ({user, post, comment}) => {
 
     convertedComments.push({
         createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
-        createdBy: name,
+        createdBy: displayName,
         userAvatar,
         text
     });
@@ -55,7 +60,6 @@ const saveComment = async ({user, post, comment}) => {
 
     await postsDAL.update(updatedPost);
 
-    return await getAll();
 }
 
 export {

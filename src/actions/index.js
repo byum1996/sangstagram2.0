@@ -1,5 +1,6 @@
 import {firebase} from '../firebase';
 import todos from './todos';
+import { getFollowing } from './dataAccess/following';
 import {uploadFile} from './storage';
 import postsDAL from './dataAccess/posts';
 
@@ -29,12 +30,46 @@ const getPosts = async (user) => {
     // this function receives one parameter, must return something else
 
     return posts.map((post) => {
-        const { createdAt, ...rest } = post;
+        const { createdAt, comments = [], ...rest } = post;
+
         return {
             ...rest,
+            comments: comments.map((comment) => {
+                const {
+                    createdAt,
+                    ...commentRest
+                } = comment;
+
+                return {
+                    createdAt: createdAt.toDate(),
+                    ...commentRest
+                }
+            }),
             createdAt: createdAt.toDate()
         }
     })
+}
+
+const getFollowingPosts = async (currentUser) => { 
+
+    // 1. identify current user - already done
+    // 2. find all following users
+    const followingUsers =  await getFollowing(currentUser)
+    // 3. find all posts for following users
+    let followingPosts = [];
+    for (let i = 0; i < followingUsers.length; i++) {
+        const followingUser = followingUsers[i];
+        const posts = await getPosts(followingUser.following);
+        followingPosts = followingPosts.concat(posts);
+    }
+    // const promises = followingUsers.reduce(async (prev, followingUser) => {
+    //     const posts = await getPosts(followingUser.following);
+    //     return prev.concat(posts);
+    // }, Promise.resolve([]));
+    // console.log('promises', promises);
+    // const followingPosts = Promise.all(promises);
+    // return all my following users posts
+    return followingPosts;
 }
 
 const removePost = (id) => postsDAL.remove(id);
@@ -43,5 +78,6 @@ export {
     todos,
     addNewPost,
     getPosts,
+    getFollowingPosts,
     removePost
 }

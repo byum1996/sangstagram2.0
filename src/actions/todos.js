@@ -20,9 +20,7 @@ const add = (val) => {
 }
 
 const remove = (id) => {
-    console.log('before remove', todos)
     todos = todos.filter((todo) => todo.id !== id);
-    console.log('after remove', todos);
     return todos;
 }
 

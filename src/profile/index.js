@@ -1,17 +1,24 @@
 import React from 'react';
 import { useQuery, useMutation, useQueryCache } from 'react-query';
-import { getFollowing, getFollowers } from '../actions/dataAccess/following';
+import { getFollowing, getFollowers, unfollowUser } from '../actions/dataAccess/following';
 import { getPosts, addNewPost, removePost } from '../actions'
 import ProfileUser from './profileUser';
-import FollowingCount from './followingCount';
-import FollowersCount from './followersCount';
+import FollowingCount from './followingFollowers/followingCount';
+import FollowersCount from './followingFollowers/followersCount';
 import Posts from './posts';
 import Box from '@material-ui/core/Box';
+import { saveComment } from '../actions/posts';
 
 const ProfileContainer = ({ user }) => {
     const cache = useQueryCache();
 
     const { isLoading, isError, data, error } = useQuery('following', () => getFollowing(user.displayName))
+
+    const [ mutate ] = useMutation(saveComment, {
+        onSuccess: () => {
+            cache.invalidateQueries('posts')
+        }
+    });
 
     const { 
         isLoading: isFollowersLoading, 
@@ -26,6 +33,20 @@ const ProfileContainer = ({ user }) => {
         data: posts, 
         error: postsError 
     } = useQuery('posts', () => getPosts(user))
+
+    const [unfollowUserMutation] = useMutation(unfollowUser, {
+        onSuccess: () => {
+            // Query Invalidations
+            cache.invalidateQueries('following')
+        },
+        onError: (error, variables, context) => {
+            // An error happened!
+        },
+    });
+
+    const handleOnUnfollow = (id) => {
+        unfollowUserMutation(id)
+    }
 
     const [savePost] = useMutation(addNewPost, {
         onSuccess: () => {
@@ -84,10 +105,25 @@ const ProfileContainer = ({ user }) => {
         <>
             <Box display='flex' flexDirection='row'>
                 <ProfileUser user={user} />
-                <FollowingCount followingNumber={followingNumber} />
-                <FollowersCount followersNumber={followersNumber} />
+                <FollowingCount 
+                    followingNumber={followingNumber} 
+                    handleOnUnfollow={handleOnUnfollow}
+                    followingResult={data} 
+                    user={user} 
+                />
+                <FollowersCount 
+                    followersNumber={followersNumber}
+                    user={user} 
+                    followers={followers} 
+                />
             </Box>
-            <Posts posts={posts} savePost={handleSavePost} user={user} handleOnDeletePost={handleOnDeletePost}/>
+            <Posts 
+                posts={posts} 
+                savePost={handleSavePost} 
+                user={user} 
+                handleOnDeletePost={handleOnDeletePost} 
+                saveComment={(post, comment) => mutate({user, post, comment})}
+            />
         </>
     )
 }

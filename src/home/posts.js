@@ -2,27 +2,25 @@ import React from 'react';
 import Post from './post';
 import Grid from '@material-ui/core/Grid';
 
-const renderPost = (post, index) => {
+const renderPost = (post, index, saveComment ) => {
     return (
-        <Grid
-            key={index}
-            container spacing={3}
-            direction="column"
-            justify="space-between"
-            alignItems="center"> 
-            <Grid item xs={12} > 
-                <Post post={post}/>
-            </Grid>     
-        </Grid>
+        <Grid key={index} item xs> 
+            <Post post={post} saveComment={saveComment}/>
+        </Grid>     
     )
 }
 
-const Posts = ({ posts = [] }) => {
+const Posts = ({ posts = [], saveComment }) => {
 
     return (
-        <>
-            {posts.map((post, index) => renderPost(post, index))}
-        </>
+        <Grid
+            container spacing={3}
+            direction="column"
+            justify="space-between"
+            alignItems="center"
+        > 
+            {posts.map((post, index) => renderPost(post, index, saveComment))}
+        </Grid>
     )
 }
 

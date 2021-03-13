@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Avatar, Box, Button } from '@material-ui/core';
+import { Avatar, Box, Button } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 
@@ -30,10 +30,6 @@ const renderFollowing = (followingResult, handleOnUnfollow) => {
 const Following = ({ followingResult, handleOnUnfollow }) => {
     return(
         <>
-            <Box display='flex' flexDirection='row'>
-                <Typography variant="h3" gutterBottom>FOLLOWING</Typography>
-            </Box>
-            
             <Box>
                 { renderFollowing(followingResult, handleOnUnfollow)}
             </Box>

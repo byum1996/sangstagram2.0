@@ -1,11 +1,19 @@
 import React from 'react';
 import Posts from './posts'
-import { useQuery } from 'react-query';
-import { getPosts } from '../actions'
+import { useQuery, useMutation, useQueryCache } from 'react-query';
+import { getFollowingPosts } from '../actions';
+import { saveComment } from '../actions/posts';
 
-const HomeContainer = () => {
+const HomeContainer = ({user}) => {
+    const cache = useQueryCache()
     
-    const { isLoading, isError, data, error } = useQuery('posts', getPosts)
+    const { isLoading, isError, data, error } = useQuery('posts', () => getFollowingPosts(user.displayName))
+
+    const [ mutate ] = useMutation(saveComment, {
+        onSuccess: () => {
+            cache.invalidateQueries('posts')
+        }
+    });
 
     if (isLoading) {
         return <span>Loading...</span>
@@ -14,9 +22,9 @@ const HomeContainer = () => {
     if (isError) {
         return <span>Error: {error.message}</span>
     }
-
+    
     return (
-        <Posts posts={data}/>
+        <Posts posts={data} saveComment={(post, comment) => mutate({user, post, comment})}/>
     )
 }
 

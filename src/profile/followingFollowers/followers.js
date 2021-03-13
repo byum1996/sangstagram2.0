@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Avatar, Box, Button } from '@material-ui/core';
+import { Avatar, Box, Button } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 
@@ -18,7 +18,7 @@ const renderFollowers = (followers) => {
                             {displayName} 
                         </Box> 
                         <Box m={2}>
-                            <Button variant="outlined">Remove</Button>
+                            <Button variant="outlined" color="primary">Remove</Button>
                         </Box> 
                     </ListItem>
                 );
@@ -30,10 +30,6 @@ const renderFollowers = (followers) => {
 const Followers = ({ followers }) => {
     return(
         <>
-            <Box display='flex' flexDirection='row'>
-                <Typography variant="h3" gutterBottom>FOLLOWERS</Typography>
-            </Box>
-            
             <Box>
                 { renderFollowers(followers)}
             </Box>
