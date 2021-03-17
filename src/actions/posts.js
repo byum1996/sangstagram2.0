@@ -35,10 +35,12 @@ const saveComment = async ({user, post, comment}) => {
         displayName, 
         photoURL: userAvatar
      } = user;
+
     const { 
         comments = [], 
         ...rest 
     } = post;
+
     const { text } = comment;
 
     const convertedComments = comments.map(({ createdAt, ...rest }) => ({
@@ -59,10 +61,59 @@ const saveComment = async ({user, post, comment}) => {
     };
 
     await postsDAL.update(updatedPost);
+}
 
+const increaseLikes = async ({user,post}) => {
+
+    const { 
+        comments = [],
+        numberOfLikes = [], 
+        ...rest 
+    } = post;
+
+    const convertedComments = comments.map(({ createdAt, ...rest }) => ({
+        ...rest,
+        createdAt: firebase.firestore.Timestamp.fromDate(createdAt)
+    }));
+
+    numberOfLikes.push(user.displayName)
+
+    const updatedPost = {
+        ...rest,
+        comments: convertedComments,
+        numberOfLikes
+    };
+
+    await postsDAL.update(updatedPost)
+}
+
+const decreaseLikes = async ({user, post}) => {
+    
+    const { 
+        comments = [],
+        numberOfLikes = [], 
+        ...rest 
+    } = post;
+
+    const convertedComments = comments.map(({ createdAt, ...rest }) => ({
+        ...rest,
+        createdAt: firebase.firestore.Timestamp.fromDate(createdAt)
+    }));
+
+    const filteredResult = numberOfLikes.filter((foo) => foo !== user.displayName)
+
+    const updatedPost = {
+        ...rest,
+        comments: convertedComments,
+        numberOfLikes: filteredResult
+    };
+
+    await postsDAL.update(updatedPost)
 }
 
 export {
     getAll,
-    saveComment
+    saveComment,
+    increaseLikes,
+    decreaseLikes,
 }

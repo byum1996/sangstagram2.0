@@ -5,7 +5,11 @@ import Typography from '@material-ui/core/Typography';
 const Caption = ({ caption }) => {
     return(
         <Box m={3} display='flex' justifyContent='center'>
-            <Typography>{caption}</Typography>
+            <Typography>
+                <Box fontWeight="fontWeightBold" >
+                    {caption}
+                </Box>
+            </Typography>
         </Box>
     )
 }

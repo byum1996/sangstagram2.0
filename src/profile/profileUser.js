@@ -38,7 +38,6 @@ const ProfileUser = ({user}) => {
                   {user.displayName}
                 </Typography>
             </Box>
-            
         </Box>
     </>
     )

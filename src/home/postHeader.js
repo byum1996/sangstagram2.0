@@ -4,7 +4,7 @@ import Avatar from '@material-ui/core/Avatar';
 import LikeButton from './likeButton'
 import Typography from '@material-ui/core/Typography';
 
-const PostHeader = ({ avatarUrl, username }) => {
+const PostHeader = ({ avatarUrl, username, likedAlready, likeClicked}) => {
     const url = avatarUrl || 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTkzNjE5MzY5M15BMl5BanBnXkFtZTgwMDI5ODMxODE@._V1_UY256_CR98,0,172,256_AL_.jpg';
 
     return (
@@ -21,7 +21,7 @@ const PostHeader = ({ avatarUrl, username }) => {
                 </Box>
             </Box>
             <Box>
-                <LikeButton />
+                <LikeButton likedAlready={likedAlready} likeClicked={likeClicked} />
             </Box>
         </Box>
                 

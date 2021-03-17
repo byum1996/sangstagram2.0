@@ -5,12 +5,15 @@ import Grid from '@material-ui/core/Grid';
 const renderPost = (post, index, saveComment ) => {
     return (
         <Grid key={index} item xs> 
-            <Post post={post} saveComment={saveComment}/>
+            <Post 
+                post={post} 
+                saveComment={saveComment} 
+            />
         </Grid>     
     )
 }
 
-const Posts = ({ posts = [], saveComment }) => {
+const Posts = ({ posts = [], saveComment}) => {
 
     return (
         <Grid

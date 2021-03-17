@@ -7,31 +7,20 @@ import FollowingCount from './followingFollowers/followingCount';
 import FollowersCount from './followingFollowers/followersCount';
 import Posts from './posts';
 import Box from '@material-ui/core/Box';
-import { saveComment } from '../actions/posts';
 
 const ProfileContainer = ({ user }) => {
     const cache = useQueryCache();
 
-    const { isLoading, isError, data, error } = useQuery('following', () => getFollowing(user.displayName))
-
-    const [ mutate ] = useMutation(saveComment, {
-        onSuccess: () => {
-            cache.invalidateQueries('posts')
-        }
-    });
+    const { isLoading, data } = useQuery('following', () => getFollowing(user.displayName))
 
     const { 
-        isLoading: isFollowersLoading, 
-        isError: isFollowersError, 
+        isLoading: isFollowersLoading,  
         data: followers, 
-        error: followersError 
     } = useQuery('followers', () => getFollowers(user.displayName))
 
     const { 
         isLoading: isPostsLoading, 
-        isError: isPostsError, 
         data: posts, 
-        error: postsError 
     } = useQuery('posts', () => getPosts(user))
 
     const [unfollowUserMutation] = useMutation(unfollowUser, {
@@ -43,6 +32,7 @@ const ProfileContainer = ({ user }) => {
             // An error happened!
         },
     });
+
 
     const handleOnUnfollow = (id) => {
         unfollowUserMutation(id)
@@ -73,32 +63,11 @@ const ProfileContainer = ({ user }) => {
 
     const handleOnDeletePost = (id) => deletePost(id)
 
-    if (isPostsLoading) {
+    if (isLoading || isPostsLoading || isFollowersLoading) {
         return <span>Loading...</span>
-    }
-
-    if (isPostsError) {
-        return <span>Error: {postsError.message}</span>
-    }
-
-    if (isLoading) {
-        return <span>Loading...</span>
-    }
-
-    if (isError) {
-        return <span>Error: {error.message}</span>
-    }
-
-    if (isFollowersLoading) {
-        return <span>Loading...</span>
-    }
-
-    if (isFollowersError) {
-        return <span>Error: {followersError.message}</span>
     }
 
     const followersNumber = followers.length
-
     const followingNumber = data.length
 
     return (
@@ -122,7 +91,6 @@ const ProfileContainer = ({ user }) => {
                 savePost={handleSavePost} 
                 user={user} 
                 handleOnDeletePost={handleOnDeletePost} 
-                saveComment={(post, comment) => mutate({user, post, comment})}
             />
         </>
     )

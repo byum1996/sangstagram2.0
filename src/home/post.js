@@ -1,7 +1,7 @@
 import React from 'react';
 import Photo from './photo';
 import PostHeader from './postHeader';
-import DateCreated from './dateCreated';
+import DateCreatedAndLikes from './dateCreatedAndLikes';
 import Caption from './caption';
 import Comments from './comments/comments';
 import CommentField from './comments/commentfield';
@@ -14,13 +14,21 @@ const Post = ({ post, saveComment }) => {
         userAvatar,
         photoUrl,
         comments,
+        numberOfLikes = [],
+        likedAlready = false,
+        likeClicked
     } = post
 
     return(
         <>
-            <PostHeader avatarUrl={userAvatar} username={createdBy}/>
+            <PostHeader 
+                avatarUrl={userAvatar} 
+                username={createdBy} 
+                likedAlready={likedAlready}
+                likeClicked={likeClicked}
+            />
             <Photo photoUrl={photoUrl}/>
-            <DateCreated dateCreated={createdAt}/>
+            <DateCreatedAndLikes dateCreated={createdAt} numberOfLikes={numberOfLikes}/>
             <Caption caption={caption}/>
             <Comments comments={comments} userAvatar={userAvatar} createdAt={createdAt} createdBy={createdBy} />
             <CommentField saveComment={(comment) => saveComment(post, comment)} />
