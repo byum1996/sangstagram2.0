@@ -2,18 +2,19 @@ import React from 'react';
 import Post from './post';
 import Grid from '@material-ui/core/Grid';
 
-const renderPost = (post, index, saveComment ) => {
+const renderPost = (post, index, saveComment, getFollowingFollowersNumbers) => {
     return (
         <Grid key={index} item xs> 
             <Post 
                 post={post} 
-                saveComment={saveComment} 
+                saveComment={saveComment}
+                getFollowingFollowersNumbers={getFollowingFollowersNumbers}
             />
         </Grid>     
     )
 }
 
-const Posts = ({ posts = [], saveComment}) => {
+const Posts = ({ posts = [], saveComment, getFollowingFollowersNumbers }) => {
 
     return (
         <Grid
@@ -22,7 +23,7 @@ const Posts = ({ posts = [], saveComment}) => {
             justify="space-between"
             alignItems="center"
         > 
-            {posts.map((post, index) => renderPost(post, index, saveComment))}
+            {posts.map((post, index) => renderPost(post, index, saveComment, getFollowingFollowersNumbers))}
         </Grid>
     )
 }

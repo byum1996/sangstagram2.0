@@ -1,12 +1,12 @@
 import React from 'react';
 import Photo from './photo';
-import PostHeader from './postHeader';
+import PostHeader from './postHeader/postHeader';
 import DateCreatedAndLikes from './dateCreatedAndLikes';
 import Caption from './caption';
 import Comments from './comments/comments';
 import CommentField from './comments/commentfield';
 
-const Post = ({ post, saveComment }) => {
+const Post = ({ post, saveComment, getFollowingFollowersNumbers }) => {
     const {
         caption,
         createdAt,
@@ -26,6 +26,7 @@ const Post = ({ post, saveComment }) => {
                 username={createdBy} 
                 likedAlready={likedAlready}
                 likeClicked={likeClicked}
+                getFollowingFollowersNumbers={() => getFollowingFollowersNumbers(createdBy)}
             />
             <Photo photoUrl={photoUrl}/>
             <DateCreatedAndLikes dateCreated={createdAt} numberOfLikes={numberOfLikes}/>

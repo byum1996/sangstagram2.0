@@ -10,7 +10,7 @@ const NavBarContainer = ({user, logout}) => {
         <Box display='flex' justifyContent='space-between'>
             <UserAvatar user={user}/>
             <LinkButton/>
-            <LogoutButton logout={logout}/>
+            <LogoutButton user={user} logout={logout}/>
         </Box>
     )
 }

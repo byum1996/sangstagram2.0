@@ -11,7 +11,10 @@ import Box from '@material-ui/core/Box';
 const ProfileContainer = ({ user }) => {
     const cache = useQueryCache();
 
-    const { isLoading, data } = useQuery('following', () => getFollowing(user.displayName))
+    const { 
+        isLoading: isFollowingLoading, 
+        data: following 
+    } = useQuery('following', () => getFollowing(user.displayName))
 
     const { 
         isLoading: isFollowersLoading,  
@@ -25,11 +28,7 @@ const ProfileContainer = ({ user }) => {
 
     const [unfollowUserMutation] = useMutation(unfollowUser, {
         onSuccess: () => {
-            // Query Invalidations
             cache.invalidateQueries('following')
-        },
-        onError: (error, variables, context) => {
-            // An error happened!
         },
     });
 
@@ -40,9 +39,7 @@ const ProfileContainer = ({ user }) => {
 
     const [savePost] = useMutation(addNewPost, {
         onSuccess: () => {
-            // Query Invalidations
             cache.invalidateQueries('posts')
-            // console.log([savePost], 'savePost')
         }
     });
 
@@ -63,12 +60,12 @@ const ProfileContainer = ({ user }) => {
 
     const handleOnDeletePost = (id) => deletePost(id)
 
-    if (isLoading || isPostsLoading || isFollowersLoading) {
+    if (isFollowingLoading || isPostsLoading || isFollowersLoading) {
         return <span>Loading...</span>
     }
 
     const followersNumber = followers.length
-    const followingNumber = data.length
+    const followingNumber = following.length
 
     return (
         <>
@@ -77,7 +74,7 @@ const ProfileContainer = ({ user }) => {
                 <FollowingCount 
                     followingNumber={followingNumber} 
                     handleOnUnfollow={handleOnUnfollow}
-                    followingResult={data} 
+                    followingResult={following} 
                     user={user} 
                 />
                 <FollowersCount 

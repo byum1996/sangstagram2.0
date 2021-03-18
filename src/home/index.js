@@ -1,13 +1,14 @@
 import React from 'react';
 import Posts from './posts'
 import { useQuery, useMutation, useQueryCache } from 'react-query';
+import { getFollowing, getFollowers } from '../actions/dataAccess/following';
 import { getFollowingPosts } from '../actions';
 import { saveComment, increaseLikes, decreaseLikes } from '../actions/posts';
 
 const HomeContainer = ({user}) => {
     const cache = useQueryCache()
     
-    const { isLoading, isError, data, error } = useQuery('posts', () => getFollowingPosts(user.displayName))
+    const { isLoading, data } = useQuery('posts', () => getFollowingPosts(user.displayName))
 
     const [ mutate ] = useMutation(saveComment, {
         onSuccess: () => {
@@ -17,24 +18,28 @@ const HomeContainer = ({user}) => {
 
     const [addUserLike] = useMutation(increaseLikes, {
         onSuccess: () => {
-            // Query Invalidations
             cache.invalidateQueries('posts')
         }
     });
     
     const [removeUserLike] = useMutation(decreaseLikes, {
         onSuccess: () => {
-            // Query Invalidations
             cache.invalidateQueries('posts')
         }
     });
 
+    const getFollowingFollowersNumbers = async (displayName) => {
+        const followers = await getFollowers(displayName)
+        const following = await getFollowing(displayName)
+
+        return {
+            followersNumber: followers.length,
+            followingNumber: following.length
+        }
+    } 
+
     if (isLoading) {
         return <span>Loading...</span>
-    }
-
-    if (isError) {
-        return <span>Error: {error.message}</span>
     }
 
     const posts = data.map((post) => {
@@ -65,12 +70,12 @@ const HomeContainer = ({user}) => {
         }
     });
 
-    console.log('posts', posts);
-
     return (
         <Posts 
             posts={posts} 
             saveComment={(post, comment) => mutate({user, post, comment})}
+            getFollowingFollowersNumbers={getFollowingFollowersNumbers}
+
         />
     )
 }

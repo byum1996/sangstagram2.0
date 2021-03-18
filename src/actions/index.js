@@ -62,13 +62,6 @@ const getFollowingPosts = async (currentUser) => {
         const posts = await getPosts(followingUser.following);
         followingPosts = followingPosts.concat(posts);
     }
-    // const promises = followingUsers.reduce(async (prev, followingUser) => {
-    //     const posts = await getPosts(followingUser.following);
-    //     return prev.concat(posts);
-    // }, Promise.resolve([]));
-    // console.log('promises', promises);
-    // const followingPosts = Promise.all(promises);
-    // return all my following users posts
     return followingPosts;
 }
 
