@@ -9,8 +9,8 @@ const renderSearchResult = (currentUser, usersFound, handleOnFollow) => {
 
     return (
         <List>
-            { usersFound.map((userFound) => (
-            <ListItem>
+            { usersFound.map((userFound, index) => (
+            <ListItem key={index}>
                 <Box m={2}>
                     <Avatar alt='user' src={userFound.photoURL}/> 
                 </Box>

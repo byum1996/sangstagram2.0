@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { searchUser } from '../actions/dataAccess/users';
 import { useMutation, useQueryCache} from 'react-query';
 import { followUser } from '../actions/dataAccess/following';
@@ -33,6 +33,10 @@ const SearchContainer = ({user}) => {
         const filteredResult = searchResult.filter(({ email }) => email !== following.email);
         setSearchResult(filteredResult);
     }
+
+    useEffect(() => {
+        handleOnClickSearch('Brandon Yum')
+    }, [])
 
     return(
         <>

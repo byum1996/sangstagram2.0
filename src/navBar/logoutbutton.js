@@ -22,8 +22,6 @@ const LogoutButton = ({logout , user}) => {
         setOpen(false);
     };
 
-
-
     return (
         <>
             <Box m={5} p={1} display='flex' justifyContent='flex-end'>

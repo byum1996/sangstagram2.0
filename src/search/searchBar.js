@@ -44,7 +44,7 @@ const SearchBar = ({ searchState, handleOnSearchChange, handleOnClickSearch  }) 
                 <SearchIcon/>
             </IconButton>
         </Paper>
-    </Box>
+      </Box>
   );
 }
 
