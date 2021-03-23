@@ -17,9 +17,11 @@ const SearchUser = ({user, searchResult, handleOnFollow, handleOnClickSearch }) 
                 handleOnSearchChange={handleOnSearchChange} 
                 handleOnClickSearch={() => handleOnClickSearch(searchState)}
             />
-            <Box m={1} p={1}>
-                <Typography hidden={searchState}>Suggested users to follow:</Typography>
-            </Box>  
+            <Typography hidden={searchState}>
+                <Box fontWeight="fontWeightBold" m={2} p={2}>
+                    Suggested users to follow:
+                </Box>  
+            </Typography>
             <Box display='flex'> { renderSearchResult(user, searchResult, handleOnFollow) } </Box>
         </Box>
     )

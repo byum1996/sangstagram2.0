@@ -38,6 +38,7 @@ const saveComment = async ({user, post, comment}) => {
 
     const { 
         comments = [], 
+        likeClicked,
         ...rest 
     } = post;
 
@@ -49,6 +50,40 @@ const saveComment = async ({user, post, comment}) => {
     }));
 
     convertedComments.push({
+        createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
+        createdBy: displayName,
+        userAvatar,
+        text
+    });
+
+    const updatedPost = {
+        ...rest,
+        comments: convertedComments
+    };
+
+    await postsDAL.update(updatedPost);
+}
+
+const removeComment = async ({user, post, comment}) => {
+    const { 
+        displayName, 
+        photoURL: userAvatar
+     } = user;
+
+    const { 
+        comments = [], 
+        likeClicked,
+        ...rest 
+    } = post;
+
+    const { text } = comment;
+
+    const convertedComments = comments.map(({ createdAt, ...rest }) => ({
+        ...rest,
+        createdAt: firebase.firestore.Timestamp.fromDate(createdAt)
+    }));
+
+    convertedComments.pop({
         createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
         createdBy: displayName,
         userAvatar,
@@ -116,4 +151,5 @@ export {
     saveComment,
     increaseLikes,
     decreaseLikes,
+    removeComment
 }

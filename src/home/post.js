@@ -6,7 +6,7 @@ import Caption from './caption';
 import Comments from './comments/comments';
 import CommentField from './comments/commentfield';
 
-const Post = ({ post, saveComment, getFollowingFollowersNumbers }) => {
+const Post = ({ post, saveComment, removeComment, getFollowingFollowersNumbers }) => {
     const {
         caption,
         createdAt,
@@ -32,7 +32,9 @@ const Post = ({ post, saveComment, getFollowingFollowersNumbers }) => {
             <DateCreatedAndLikes dateCreated={createdAt} numberOfLikes={numberOfLikes}/>
             <Caption caption={caption}/>
             <Comments comments={comments} userAvatar={userAvatar} createdAt={createdAt} createdBy={createdBy} />
-            <CommentField saveComment={(comment) => saveComment(post, comment)} />
+            <CommentField 
+                saveComment={(comment) => saveComment(post, comment)} 
+            />
         </>
     )
 }

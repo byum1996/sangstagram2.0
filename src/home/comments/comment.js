@@ -8,17 +8,17 @@ const Comment = ({ comment }) => {
     const { userAvatar, createdAt, createdBy, text } = comment;
     
     return (
-        <Box className="CommentsSpace" display='flex' flexDirection='row' alignItems='center'>
-            <Box m={1} >
+        <Box className="CommentsSpace" display='flex' flexDirection='row' justifyContent='space-between'>
+            <Box display='flex' alignItems='row' m={1}>
                 <Avatar alt="Comments" src={userAvatar} />
+                <Box>
+                    <Button>{createdBy}</Button>
+                </Box>
+                <Box m={1}>
+                    <Typography variant="subtitle2" >{text}</Typography> 
+                </Box>
             </Box>
-            <Box m={1}>
-                <Button>{createdBy}</Button>
-            </Box>
-            <Box m={1}>
-                <Typography variant="subtitle2" >{text}</Typography> 
-            </Box>
-            <Box m={1} dispay='flex' justifyContent='flex-end'>
+            <Box m={2}>
                 <Typography variant='caption'>{createdAt.toLocaleDateString()}</Typography>
             </Box>    
         </Box>

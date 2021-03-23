@@ -56,7 +56,9 @@ const FollowersCount = ({followersNumber, user, followers}) => {
     <div>
         <Box display="flex" flexDirection="column" p={1} m={1}>
             <Typography onClick={handleClickOpen}>FOLLOWERS</Typography>
-            <Typography onClick={handleClickOpen} variant="overline">{followersNumber}</Typography>
+            <Typography onClick={handleClickOpen} variant="overline">
+              {followersNumber}
+            </Typography>
         </Box>
         <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
             <DialogTitle id="customized-dialog-title" onClose={handleClose}>

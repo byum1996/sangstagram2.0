@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CommentField = ({ saveComment }) => {
+const CommentField = ({ saveComment, removeComment }) => {
     const classes = useStyles();
 
     const [fieldState, setFieldState] = useState('');

@@ -75,7 +75,6 @@ const HomeContainer = ({user}) => {
             posts={posts} 
             saveComment={(post, comment) => mutate({user, post, comment})}
             getFollowingFollowersNumbers={getFollowingFollowersNumbers}
-
         />
     )
 }
