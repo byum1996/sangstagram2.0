@@ -1,25 +1,32 @@
 import React from 'react';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import { Avatar } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, removeComment }) => {
     const { userAvatar, createdAt, createdBy, text } = comment;
     
     return (
         <Box className="CommentsSpace" display='flex' flexDirection='row' justifyContent='space-between'>
             <Box display='flex' alignItems='row' m={1}>
                 <Avatar alt="Comments" src={userAvatar} />
-                <Box>
-                    <Button>{createdBy}</Button>
-                </Box>
-                <Box m={1}>
-                    <Typography variant="subtitle2" >{text}</Typography> 
-                </Box>
+                <Typography>
+                    <Box fontWeight="fontWeightBold" m={1}>
+                        {createdBy}
+                    </Box>
+                </Typography>
+                <Typography variant="subtitle2" >
+                    <Box fontStyle="italic" m={1}>
+                        {text}
+                    </Box>
+                </Typography> 
             </Box>
-            <Box m={2}>
+            <Box m={2} display='flex' flexDirection='row'>
                 <Typography variant='caption'>{createdAt.toLocaleDateString()}</Typography>
+                <Box>
+                    <DeleteIcon />
+                </Box>
             </Box>    
         </Box>
     )

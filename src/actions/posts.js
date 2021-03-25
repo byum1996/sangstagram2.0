@@ -83,16 +83,16 @@ const removeComment = async ({user, post, comment}) => {
         createdAt: firebase.firestore.Timestamp.fromDate(createdAt)
     }));
 
-    convertedComments.pop({
-        createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
-        createdBy: displayName,
+    const filteredComments = convertedComments.filter(() => ({
+        displayName,
         userAvatar,
-        text
-    });
+        text,
+        ...rest
+    }))
 
     const updatedPost = {
         ...rest,
-        comments: convertedComments
+        comments: filteredComments
     };
 
     await postsDAL.update(updatedPost);

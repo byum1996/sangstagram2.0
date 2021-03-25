@@ -23,10 +23,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CommentField = ({ saveComment, removeComment }) => {
+const CommentField = ({ saveComment }) => {
     const classes = useStyles();
-
-    const [fieldState, setFieldState] = useState('');
+    const [ fieldState, setFieldState ] = useState('');
 
     const handleOnChange = (event) => {
         setFieldState(event.target.value)
@@ -40,24 +39,26 @@ const CommentField = ({ saveComment, removeComment }) => {
     }
 
   return (
-      <Box display='flex' justifyContent='center' p={2}>
-        <Paper className={classes.root} varaint='outlined' elevation={10}>
-            <InputBase
-                onChange={handleOnChange}
-                value={fieldState}
-                className={classes.input}
-                placeholder="Enter comment here..."
-            />
-            <IconButton 
-                className={classes.iconButton} 
-                aria-label="search" 
-                disabled={fieldState.length === 0} 
-                onClick={handleOnClick}
-            >
-                <PublishIcon />
-            </IconButton>
-        </Paper>
-    </Box>
+    <>
+        <Box display='flex' justifyContent='center' p={2}>
+            <Paper className={classes.root} varaint='outlined' elevation={10}>
+                <InputBase
+                    onChange={handleOnChange}
+                    value={fieldState}
+                    className={classes.input}
+                    placeholder="Enter comment here..."
+                />
+                <IconButton 
+                    className={classes.iconButton} 
+                    aria-label="search" 
+                    disabled={fieldState.length === 0} 
+                    onClick={handleOnClick}
+                >
+                  <PublishIcon />
+                </IconButton>
+            </Paper>
+        </Box>
+    </>
   );
 }
 

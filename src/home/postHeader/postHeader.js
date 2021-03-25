@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Box from '@material-ui/core/Box';
 import LikeButton from './likeButton'
 import { withStyles } from '@material-ui/core/styles';
@@ -48,8 +48,8 @@ const DialogTitle = withStyles(styles)((props) => {
 const PostHeader = ({ avatarUrl, username, likedAlready, likeClicked, getFollowingFollowersNumbers }) => {
     const url = avatarUrl || 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTkzNjE5MzY5M15BMl5BanBnXkFtZTgwMDI5ODMxODE@._V1_UY256_CR98,0,172,256_AL_.jpg';
     
-    const [followersNumberState, setFollowersNumber] = React.useState(0);
-    const [followingNumberState, setFollowingNumber] = React.useState(0);
+    const [followersNumberState, setFollowersNumber] = useState(0);
+    const [followingNumberState, setFollowingNumber] = useState(0);
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = async () => {

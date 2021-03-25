@@ -3,14 +3,14 @@ import Posts from './posts'
 import { useQuery, useMutation, useQueryCache } from 'react-query';
 import { getFollowing, getFollowers } from '../actions/dataAccess/following';
 import { getFollowingPosts } from '../actions';
-import { saveComment, increaseLikes, decreaseLikes } from '../actions/posts';
+import { saveComment, removeComment, increaseLikes, decreaseLikes } from '../actions/posts';
 
 const HomeContainer = ({user}) => {
     const cache = useQueryCache()
     
     const { isLoading, data } = useQuery('posts', () => getFollowingPosts(user.displayName))
 
-    const [ mutate ] = useMutation(saveComment, {
+    const [ mutate ] = useMutation(saveComment, removeComment, {
         onSuccess: () => {
             cache.invalidateQueries('posts')
         }
@@ -74,6 +74,7 @@ const HomeContainer = ({user}) => {
         <Posts 
             posts={posts} 
             saveComment={(post, comment) => mutate({user, post, comment})}
+            removeComment={(post, comment) => mutate({user, post, comment})}
             getFollowingFollowersNumbers={getFollowingFollowersNumbers}
         />
     )
