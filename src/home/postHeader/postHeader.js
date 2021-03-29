@@ -50,7 +50,7 @@ const PostHeader = ({ avatarUrl, username, likedAlready, likeClicked, getFollowi
     
     const [followersNumberState, setFollowersNumber] = useState(0);
     const [followingNumberState, setFollowingNumber] = useState(0);
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
     const handleClickOpen = async () => {
         const { followersNumber, followingNumber } = await getFollowingFollowersNumbers();

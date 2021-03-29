@@ -2,7 +2,7 @@ import React from 'react';
 import Photo from './photo';
 import PostHeader from './postHeader/postHeader';
 import DateCreatedAndLikes from './dateCreatedAndLikes';
-import CaptionAndIcons from './captionAndIcons';
+import Caption from './caption';
 import Comments from './comments/comments';
 import PostButtons from './postButtons';
 
@@ -30,7 +30,7 @@ const Post = ({ post, saveComment, removeComment, getFollowingFollowersNumbers }
             />
             <Photo photoUrl={photoUrl}/>
             <DateCreatedAndLikes dateCreated={createdAt} numberOfLikes={numberOfLikes}/>
-            <CaptionAndIcons caption={caption}/>
+            <Caption caption={caption}/>
             <Comments 
                 comments={comments} 
                 userAvatar={userAvatar} 

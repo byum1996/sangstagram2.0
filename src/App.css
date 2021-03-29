@@ -21,6 +21,8 @@ img {
 }
 
 .CommentsSpace {
-    border-top-style: inset;
-    border-radius: 20px;
+    border-top-style: solid;
+    border-left-style: solid;
+    border-right-style: solid;
+    border-radius: 10px;
 }

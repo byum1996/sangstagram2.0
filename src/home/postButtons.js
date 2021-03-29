@@ -37,7 +37,6 @@ const PostButtons= ({ saveComment }) => {
           <CommentField saveComment={saveComment}/>
         </span>
       }
-      
     </>
   );
 }

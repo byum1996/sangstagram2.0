@@ -2,10 +2,13 @@ import React from 'react';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { Avatar } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
 
 const Comment = ({ comment, removeComment }) => {
     const { userAvatar, createdAt, createdBy, text } = comment;
+
+    const handleOnClickRemove = () => {
+        removeComment()
+    }
     
     return (
         <Box className="CommentsSpace" display='flex' flexDirection='row' justifyContent='space-between'>
@@ -16,7 +19,7 @@ const Comment = ({ comment, removeComment }) => {
                         {createdBy}
                     </Box>
                 </Typography>
-                <Typography variant="subtitle2" >
+                <Typography variant="subtitle2" onClick={handleOnClickRemove} >
                     <Box fontStyle="italic" m={1}>
                         {text}
                     </Box>
@@ -24,9 +27,6 @@ const Comment = ({ comment, removeComment }) => {
             </Box>
             <Box m={2} display='flex' flexDirection='row'>
                 <Typography variant='caption'>{createdAt.toLocaleDateString()}</Typography>
-                <Box>
-                    <DeleteIcon />
-                </Box>
             </Box>    
         </Box>
     )

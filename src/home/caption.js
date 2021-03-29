@@ -2,7 +2,7 @@ import React from 'react';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 
-const CaptionAndIcons = ({ caption }) => {
+const Caption = ({ caption }) => {
     return(
         <Box m={3} display='flex' justifyContent='center'>
             <Typography>
@@ -14,4 +14,4 @@ const CaptionAndIcons = ({ caption }) => {
     )
 }
 
-export default CaptionAndIcons;
+export default Caption;
