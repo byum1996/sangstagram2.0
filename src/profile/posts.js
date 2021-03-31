@@ -6,13 +6,16 @@ import AddPost from './addPost/addPost';
 const renderPost = (post, index, handleOnDeletePost) => {
 
     return (
-            <Grid item xs key={index} > 
-                <PostThumbnail 
-                    post={post} 
-                    handleOnDeletePost={handleOnDeletePost} 
-                />
-            </Grid>
-       
+        <Grid 
+            item
+            spacing={5} 
+            key={index}
+        > 
+            <PostThumbnail 
+                post={post} 
+                handleOnDeletePost={handleOnDeletePost} 
+            />
+        </Grid>
     )
 }
 
@@ -25,8 +28,10 @@ const Posts = ({ posts = [], savePost, user, handleOnDeletePost}) => {
     return(
         <>
             <Grid
-                direction='row'
-                container spacing={3}
+                container
+                direction="row"
+                justify="center"
+                spacing={10}
             > 
                 {posts.map((post, index) => renderPost(post, index, handleOnDeletePost))}
             </Grid>

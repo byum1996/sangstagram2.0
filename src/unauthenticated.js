@@ -12,7 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '150vh',
+    height: '100vh',
   },
   image: {
     backgroundImage: 'url(https://source.unsplash.com/random)',

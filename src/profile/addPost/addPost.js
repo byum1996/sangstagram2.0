@@ -23,6 +23,7 @@ const AddPost = ({handleOnSubmit, user}) => {
 
     const handleOnClickClose = () => {
         setOpenState(false)
+        setCaptionState('')
     }
 
     const handleOnDropzoneChange = (files) => {
@@ -36,6 +37,7 @@ const AddPost = ({handleOnSubmit, user}) => {
     const handleOnSubmitClick = () => {
         handleOnSubmit(fileState, captionState, user)
         setOpenState(false)
+        setCaptionState('')
     }
 
     const disabledUploadButton = !fileState;
@@ -44,7 +46,7 @@ const AddPost = ({handleOnSubmit, user}) => {
         <>
             <AddPostFab handleOnClickOpen={handleOnClickOpen}/>
             <Dialog open={openState} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">New Post</DialogTitle>
+                <DialogTitle id="form-dialog-title">Uploading post...</DialogTitle>
                 <DialogContent>
                     <DropzoneArea onChange={handleOnDropzoneChange}/>
                     <TextField 
