@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "sh -ac '. ./.env.dev;   firebase use sangstagram-dev   && react-scripts start'",
-    "dev": "  sh -ac '. ./.env.dev;   firebase use sangstagram-dev   && react-scripts build && firebase deploy'",
+    "dev": "  sh -ac '. ./.env.dev;   firebase use sangstagram-dev   && firebase deploy'",
     "live": " sh -ac '. ./.env.live;  firebase use sangstagram-live  && react-scripts build && firebase deploy'",
     "build": "react-scripts build",
     "test": "react-scripts test",

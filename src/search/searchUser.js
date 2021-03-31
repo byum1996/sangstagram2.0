@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import SearchBar from './searchBar';
 import renderSearchResult from './renderSearch';
 
-const SearchUser = ({user, searchResult, handleOnFollow, handleOnClickSearch }) => {
+const SearchUser = ({ user, searchResult, handleOnFollow, handleOnClickSearch }) => {
     const [searchState, setSearchState] = useState('')
 
     const handleOnSearchChange = (event) => {
