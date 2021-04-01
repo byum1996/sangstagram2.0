@@ -3,12 +3,8 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { Avatar } from '@material-ui/core';
 
-const Comment = ({ comment, removeComment }) => {
+const Comment = ({ comment }) => {
     const { userAvatar, createdAt, createdBy, text } = comment;
-
-    const handleOnClickRemove = () => {
-        removeComment()
-    }
     
     return (
         <Box className="CommentsSpace" display='flex' flexDirection='row' justifyContent='space-between'>
@@ -19,7 +15,7 @@ const Comment = ({ comment, removeComment }) => {
                         {createdBy}
                     </Box>
                 </Typography>
-                <Typography variant="subtitle2" onClick={handleOnClickRemove} >
+                <Typography variant="subtitle2" >
                     <Box fontStyle="italic" m={1}>
                         {text}
                     </Box>

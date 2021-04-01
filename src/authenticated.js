@@ -17,14 +17,14 @@ const Authenticated = ({logout, user}) => {
             <NavBar user={user} logout={logout}/>
             
             <Switch>
-              <Route path='/home' exact>
-                <Home user={user}/>
-              </Route>
               <Route path='/search' exact>
                 <Search user={user}/>
               </Route>
               <Route path='/profile' exact>
                 <Profile user={user}/>
+              </Route>
+              <Route path='/'>
+                <Home user={user}/>
               </Route>
             </Switch>
             

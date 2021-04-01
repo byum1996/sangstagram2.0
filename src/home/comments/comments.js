@@ -1,16 +1,16 @@
 import React from 'react';
 import Comment from './comment'
 
-const renderComment= (comment, removeComment, index) => {
+const renderComment= (comment, index) => {
     return (
-        <Comment key={index} comment={comment} removeComment={removeComment} />
+        <Comment key={index} comment={comment} />
     )
 }
 
-const Comments = ({ comments = [], removeComment }) => {
+const Comments = ({ comments = [] }) => {
     return (
         <>
-            {comments.map((comment, index) => renderComment(comment, removeComment, index))}
+            {comments.map((comment, index) => renderComment(comment, index))}
         </>    
     )
 }

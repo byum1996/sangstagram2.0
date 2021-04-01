@@ -6,7 +6,7 @@ import Caption from './caption';
 import Comments from './comments/comments';
 import PostButtons from './postButtons';
 
-const Post = ({ post, saveComment, removeComment, getFollowingFollowersNumbers }) => {
+const Post = ({ post, saveComment, getFollowingFollowersNumbers }) => {
     const {
         caption,
         createdAt,
@@ -36,7 +36,6 @@ const Post = ({ post, saveComment, removeComment, getFollowingFollowersNumbers }
                 userAvatar={userAvatar} 
                 createdAt={createdAt} 
                 createdBy={createdBy}
-                removeComment={removeComment} 
             />
             <PostButtons saveComment={(comment) => saveComment(post, comment)} />
         </>

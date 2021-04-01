@@ -3,7 +3,6 @@ import CommentField from './comments/commentfield';
 import Box from '@material-ui/core/Box';
 import ChatIcon from '@material-ui/icons/Chat';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
-import ReportIcon from '@material-ui/icons/Report';
 import Button from '@material-ui/core/Button';
 
 const PostButtons= ({ saveComment }) => {
@@ -25,9 +24,6 @@ const PostButtons= ({ saveComment }) => {
         </Button>
         <Button onClick={handleOnCancelButton} disabled={!showFieldState}>
           <ChatBubbleOutlineIcon />
-        </Button>
-        <Button>
-          <ReportIcon />
         </Button>
       </Box>
       
