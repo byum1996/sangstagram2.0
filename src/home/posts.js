@@ -1,15 +1,18 @@
 import React from 'react';
 import Post from './post';
 import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 
 const renderPost = (post, index, saveComment, getFollowingFollowersNumbers) => {
     return (
         <Grid key={index} item xs> 
-            <Post 
-                post={post} 
-                saveComment={saveComment}
-                getFollowingFollowersNumbers={getFollowingFollowersNumbers}
-            />
+            <Box m={5}>
+                <Post 
+                    post={post} 
+                    saveComment={saveComment}
+                    getFollowingFollowersNumbers={getFollowingFollowersNumbers}
+                />
+            </Box>
         </Grid>     
     )
 }

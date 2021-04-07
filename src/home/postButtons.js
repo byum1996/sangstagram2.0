@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import CommentField from './comments/commentfield';
 import Box from '@material-ui/core/Box';
-import ChatIcon from '@material-ui/icons/Chat';
-import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
-import Button from '@material-ui/core/Button';
+import AddCommentIcon from '@material-ui/icons/AddComment';
+import IconButton from '@material-ui/core/IconButton';
 
 const PostButtons= ({ saveComment }) => {
     const [ showFieldState, setShowFieldState ] = useState(false)
@@ -18,19 +17,16 @@ const PostButtons= ({ saveComment }) => {
 
   return (
     <>
-      <Box display='flex' justifyContent='flex-start' >
-        <Button onClick={handleOnCommentButton} disabled={showFieldState}>
-          <ChatIcon />
-        </Button>
-        <Button onClick={handleOnCancelButton} disabled={!showFieldState}>
-          <ChatBubbleOutlineIcon />
-        </Button>
+      <Box display='flex' justifyContent='flex-start'>
+        <IconButton onClick={handleOnCommentButton} disabled={showFieldState}>
+          <AddCommentIcon />
+        </IconButton>
       </Box>
       
       {
         showFieldState && 
         <span>
-          <CommentField saveComment={saveComment}/>
+          <CommentField saveComment={saveComment} handleOnCancelButton={handleOnCancelButton}/>
         </span>
       }
     </>

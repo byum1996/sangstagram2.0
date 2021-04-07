@@ -9,7 +9,7 @@ const LinkButton = () => {
     return (
         <Box display='flex'  flexDirection='row'  m={1} p={5}>
             <Box p={3}>
-                <Link href="/home">
+                <Link href="/">
                     <HomeIcon />
                 </Link>
             </Box>

@@ -34,9 +34,9 @@ const SearchContainer = ({user}) => {
         setSearchResult(filteredResult);
     }
 
-    useEffect(() => {
-        handleOnClickSearch('Brandon Yum')
-    }, [])
+    // useEffect(() => {
+    //     handleOnClickSearch('Brandon Yum')
+    // }, [])
 
     return(
         <>

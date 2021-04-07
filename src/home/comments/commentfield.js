@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import PublishIcon from '@material-ui/icons/Publish';
+import CancelIcon from '@material-ui/icons/Cancel';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CommentField = ({ saveComment }) => {
+const CommentField = ({ saveComment, handleOnCancelButton }) => {
     const classes = useStyles();
     const [ fieldState, setFieldState ] = useState('');
 
@@ -55,6 +56,9 @@ const CommentField = ({ saveComment }) => {
                     onClick={handleOnClick}
                 >
                   <PublishIcon />
+                </IconButton>
+                <IconButton onClick={handleOnCancelButton}>
+                  <CancelIcon />
                 </IconButton>
             </Paper>
         </Box>
