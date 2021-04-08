@@ -17,17 +17,20 @@ const PostButtons= ({ saveComment }) => {
 
   return (
     <>
-      <Box display='flex' justifyContent='flex-start'>
-        <IconButton onClick={handleOnCommentButton} disabled={showFieldState}>
-          <AddCommentIcon />
-        </IconButton>
-      </Box>
-      
       {
-        showFieldState && 
-        <span>
-          <CommentField saveComment={saveComment} handleOnCancelButton={handleOnCancelButton}/>
-        </span>
+        !showFieldState ? (
+          <span>
+            <Box display='flex' justifyContent='flex-start' m={2}>
+              <IconButton onClick={handleOnCommentButton} disabled={showFieldState}>
+                <AddCommentIcon />
+              </IconButton>
+            </Box>
+          </span>
+        ) : (
+          <span>
+            <CommentField saveComment={saveComment} handleOnCancelButton={handleOnCancelButton}/>
+          </span>
+        )
       }
     </>
   );
