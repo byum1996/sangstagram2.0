@@ -6,12 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import DeleteIcon from '@material-ui/icons/Delete';
-import Slide from '@material-ui/core/Slide';
 import { makeStyles } from "@material-ui/core/styles";
-
-const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
-});
 
 const useStyles = makeStyles({
     rightToolbar: {
@@ -42,7 +37,7 @@ const PostThumbnail = ({post, handleOnDeletePost}) => {
                 alt='ProfileThumbnailPic'
                 src={photoUrl}
             />
-            <Dialog fullScreen open={openState} TransitionComponent={Transition}>
+            <Dialog fullScreen open={openState}>
                 <AppBar position='static'>
                     <Toolbar>
                         <IconButton edge="start" color="inherit" onClick={handleOnClickClose} aria-label="close">
