@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import SearchBar from './searchBar';
 import renderSearchResult from './renderSearch';
 
-const SearchUser = ({ user, searchResult, handleOnFollow, handleOnClickSearch }) => {
+const SearchUser = ({ user, searchResult, handleOnFollow, handleOnUnfollow, handleOnClickSearch }) => {
     const [searchState, setSearchState] = useState('')
 
     const handleOnSearchChange = (event) => {
@@ -25,7 +25,7 @@ const SearchUser = ({ user, searchResult, handleOnFollow, handleOnClickSearch })
                     Brandon Yum, Gunther Park, Sang Yum
                 </Box>  
             </Typography>
-            <Box display='flex'> { renderSearchResult(user, searchResult, handleOnFollow) } </Box>
+            <Box display='flex'> { renderSearchResult(user, searchResult, handleOnFollow, handleOnUnfollow) } </Box>
         </Box>
     )
 }

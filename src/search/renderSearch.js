@@ -5,7 +5,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import { Avatar } from '@material-ui/core';
 
-const renderSearchResult = (currentUser, usersFound, handleOnFollow) => {
+const renderSearchResult = (currentUser, usersFound, handleOnFollow, handleOnUnfollow) => {
 
     return (
         <List>
@@ -19,6 +19,7 @@ const renderSearchResult = (currentUser, usersFound, handleOnFollow) => {
                 </Box> 
                 <Box m={2}>
                     <Button variant="outlined" color="primary" onClick={() => handleOnFollow(currentUser,userFound)}>Follow</Button>
+                    <Button variant="outlined" color="primary" onClick={handleOnUnfollow}>Unfollow</Button>
                 </Box>
             </ListItem>))}
         </List>
