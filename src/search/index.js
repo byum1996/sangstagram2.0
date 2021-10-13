@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { searchUser } from '../actions/dataAccess/users';
 import { useMutation, useQueryCache} from 'react-query';
 import { followUser, unfollowUser } from '../actions/dataAccess/following';
@@ -8,6 +8,7 @@ const SearchContainer = ({user}) => {
     const cache = useQueryCache();
     const [searchResult, setSearchResult] = useState([])
 
+    console.log('user', user)
 
     const [followUserMutation] = useMutation(followUser, {
         onSuccess: () => {
@@ -24,7 +25,6 @@ const SearchContainer = ({user}) => {
             cache.invalidateQueries('following')
         },
     });
-
 
     const handleOnClickSearch = async (searchTerm) => {
         const result = await searchUser(searchTerm);
@@ -44,11 +44,7 @@ const SearchContainer = ({user}) => {
     const handleOnUnfollow = (id) => {
         unfollowUserMutation(id)
     }
-
-    // useEffect(() => {
-    //     handleOnClickSearch('Brandon Yum')
-    // }, [])
-
+    
     return(
         <>
             <SearchUser 

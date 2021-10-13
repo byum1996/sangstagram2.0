@@ -2,14 +2,15 @@ import React , {useState} from 'react';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import SearchBar from './searchBar';
-import renderSearchResult from './renderSearch';
+import SearchResult from './searchResult';
 
-const SearchUser = ({ user, searchResult, handleOnFollow, handleOnUnfollow, handleOnClickSearch }) => {
+const SearchUser = ({ user, searchResult = [], handleOnFollow, handleOnUnfollow, handleOnClickSearch }) => {
     const [searchState, setSearchState] = useState('')
 
     const handleOnSearchChange = (event) => {
         setSearchState(event.target.value)
     }
+
     return(
         <Box>
             <SearchBar
@@ -25,7 +26,14 @@ const SearchUser = ({ user, searchResult, handleOnFollow, handleOnUnfollow, hand
                     Brandon Yum, Gunther Park, Sang Yum
                 </Box>  
             </Typography>
-            <Box display='flex'> { renderSearchResult(user, searchResult, handleOnFollow, handleOnUnfollow) } </Box>
+            <Box display='flex'> 
+                <SearchResult 
+                    currentUser={user} 
+                    usersFound={searchResult} 
+                    handleOnFollow={handleOnFollow} 
+                    handleOnUnfollow={handleOnUnfollow} 
+                />  
+            </Box>
         </Box>
     )
 }

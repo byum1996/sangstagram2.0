@@ -5,7 +5,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import { Avatar } from '@material-ui/core';
 
-const renderSearchResult = (currentUser, usersFound, handleOnFollow, handleOnUnfollow) => {
+const SearchResult = ({currentUser, usersFound = [], handleOnFollow, handleOnUnfollow}) => {
 
     return (
         <List>
@@ -26,4 +26,4 @@ const renderSearchResult = (currentUser, usersFound, handleOnFollow, handleOnUnf
     )
 }
 
-export default renderSearchResult;
+export default SearchResult;
